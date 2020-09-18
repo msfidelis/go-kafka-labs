@@ -2,7 +2,7 @@ FROM golang:1.15 AS builder
 
 RUN go get -u github.com/cosmtrek/air
 
-WORKDIR $GOPATH/src/chip
+WORKDIR $GOPATH/src/app_consumer_log
 
 COPY . ./
 

@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"strings"
 	"time"
 
 	guuid "github.com/google/uuid"
@@ -37,9 +38,18 @@ func main() {
 }
 
 func getWriter(bootstrap_servers, topic string) *kafka.Writer {
+
+	dialer := &kafka.Dialer{
+		Timeout:  10 * time.Second,
+		ClientID: "oi",
+	}
+
 	return kafka.NewWriter(kafka.WriterConfig{
-		Brokers:  []string{bootstrap_servers},
-		Topic:    topic,
-		Balancer: &kafka.LeastBytes{},
+		Brokers:      strings.Split(bootstrap_servers, ","),
+		Topic:        "demo",
+		Balancer:     &kafka.LeastBytes{},
+		Dialer:       dialer,
+		WriteTimeout: 10 * time.Second,
+		ReadTimeout:  10 * time.Second,
 	})
 }
