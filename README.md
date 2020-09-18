@@ -12,3 +12,10 @@ docker-compose up --force-recreate
 ```sh
 docker-compose exec kafka  kafka-topics --create --topic demo.orders.new --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
 ```
+
+
+# Consuming test 
+
+```sh
+docker-compose exec kafka kafka-console-consumer --bootstrap-server localhost:29092 --topic demo.orders.new --from-beginning --max-messages 100 
+```
