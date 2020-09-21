@@ -22,6 +22,7 @@ services:
       - ENVIRONMENT=dev
       - KAFKA_BROKER=kafka:9092
       - KAFKA_TOPIC=demo.orders.new
+      - CONSUMER_GROUP=logger
     volumes:
         - ./app_consumer_log:/go/src/app_consumer_log
     networks:
@@ -42,7 +43,7 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:29092,PLAINTEXT_HOST://kafka:9092,
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
@@ -65,7 +66,7 @@ services:
     ports:
       - 19000:9000
     environment:
-      KAFKA_BROKERCONNECT: kafka:29092
+      KAFKA_BROKERCONNECT: kafka:9092
 
 networks:
   developer:
