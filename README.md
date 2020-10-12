@@ -10,7 +10,7 @@ docker-compose up --force-recreate
 # Creating demo topic
 
 ```sh
-docker-compose exec kafka  kafka-topics --create --topic demo.orders.new --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+docker-compose exec kafka  kafka-topics --create --topic demo.orders.new --partitions 3 --replication-factor 3 --if-not-exists --zookeeper zookeeper:32181
 ```
 
 
